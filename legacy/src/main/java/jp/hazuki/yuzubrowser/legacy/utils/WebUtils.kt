@@ -19,11 +19,13 @@ import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
-import android.util.Log
 import android.webkit.URLUtil
 import com.google.firebase.FirebaseApp
 import com.google.firebase.dynamiclinks.ShortDynamicLink
-import com.google.firebase.dynamiclinks.ktx.*
+import com.google.firebase.dynamiclinks.ktx.androidParameters
+import com.google.firebase.dynamiclinks.ktx.dynamicLinks
+import com.google.firebase.dynamiclinks.ktx.shortLinkAsync
+import com.google.firebase.dynamiclinks.ktx.socialMetaTagParameters
 import com.google.firebase.ktx.Firebase
 import jp.hazuki.yuzubrowser.adblock.filter.fastmatch.FastMatcherFactory
 import jp.hazuki.yuzubrowser.legacy.R
@@ -70,7 +72,7 @@ object WebUtils {
         val dynamicLinkTask = Firebase.dynamicLinks.shortLinkAsync(ShortDynamicLink.Suffix.SHORT) {
             link = deepLinkUrl
             domainUriPrefix = "https://hazuki.page.link/"
-            androidParameters { }
+            androidParameters {}
             socialMetaTagParameters {
                 this.title = "Download Yuzu App"
                 description = "Try YuzuBrowser today!"
