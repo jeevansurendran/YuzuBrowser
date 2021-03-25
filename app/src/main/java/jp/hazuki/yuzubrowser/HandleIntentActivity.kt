@@ -29,6 +29,7 @@ import com.google.firebase.dynamiclinks.ktx.dynamicLinks
 import com.google.firebase.ktx.Firebase
 import jp.hazuki.yuzubrowser.browser.BrowserActivity
 import jp.hazuki.yuzubrowser.legacy.Constants.intent.EXTRA_OPEN_FROM_YUZU
+import jp.hazuki.yuzubrowser.legacy.Constants.share.SHARE_URL
 import jp.hazuki.yuzubrowser.legacy.utils.WebUtils
 import jp.hazuki.yuzubrowser.ui.extensions.getHost
 import jp.hazuki.yuzubrowser.ui.settings.AppPrefs
@@ -55,7 +56,7 @@ class HandleIntentActivity : FragmentActivity() {
             if (url.isNullOrEmpty())
                 url = intent.getStringExtra(Intent.EXTRA_TEXT)
             if (!url.isNullOrEmpty()) {
-                if (url.getHost() == "yuzu.share") {
+                if (url.getHost()  == SHARE_URL.host) {
                     Firebase.dynamicLinks
                         .getDynamicLink(intent)
                         .addOnSuccessListener(this) { pendingDynamicLinkData ->

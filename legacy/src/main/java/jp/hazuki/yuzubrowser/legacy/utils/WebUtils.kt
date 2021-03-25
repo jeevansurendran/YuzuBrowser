@@ -28,6 +28,12 @@ import com.google.firebase.dynamiclinks.ktx.shortLinkAsync
 import com.google.firebase.dynamiclinks.ktx.socialMetaTagParameters
 import com.google.firebase.ktx.Firebase
 import jp.hazuki.yuzubrowser.adblock.filter.fastmatch.FastMatcherFactory
+import jp.hazuki.yuzubrowser.legacy.Constants
+import jp.hazuki.yuzubrowser.legacy.Constants.share.GDL_DYNAMIC_URL
+import jp.hazuki.yuzubrowser.legacy.Constants.share.SHARE_URL
+import jp.hazuki.yuzubrowser.legacy.Constants.share.UTM_DESCRIPTION
+import jp.hazuki.yuzubrowser.legacy.Constants.share.UTM_IMAGE_URL
+import jp.hazuki.yuzubrowser.legacy.Constants.share.UTM_TITLE
 import jp.hazuki.yuzubrowser.legacy.R
 import jp.hazuki.yuzubrowser.ui.utils.PackageUtils
 import java.util.*
@@ -67,16 +73,16 @@ object WebUtils {
 
     fun shareWeb(context: Context, url: String?, title: String?) {
         if (url == null) return
-        val deepLinkUrl = Uri.parse("https://yuzu.share/").buildUpon().appendQueryParameter("aURL", url).build()
+        val deepLinkUrl = SHARE_URL.buildUpon().appendQueryParameter("aURL", url).build()
         FirebaseApp.initializeApp(context)
         val dynamicLinkTask = Firebase.dynamicLinks.shortLinkAsync(ShortDynamicLink.Suffix.SHORT) {
             link = deepLinkUrl
-            domainUriPrefix = "https://hazuki.page.link/"
+            domainUriPrefix = GDL_DYNAMIC_URL
             androidParameters {}
             socialMetaTagParameters {
-                this.title = "Download Yuzu App"
-                description = "Try YuzuBrowser today!"
-                imageUrl = Uri.parse("https://dl3.cbsistatic.com/catalog/2020/03/25/cd7de15c-73e1-46ff-bae9-e53b464b1278/imgingest-5193827876681925843.png")
+                this.title = UTM_TITLE
+                description = UTM_DESCRIPTION
+                imageUrl = Uri.parse(UTM_IMAGE_URL)
             }
         }
         dynamicLinkTask.addOnSuccessListener {
