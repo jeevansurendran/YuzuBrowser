@@ -16,6 +16,7 @@
 
 package jp.hazuki.yuzubrowser.legacy
 
+import android.net.Uri
 import jp.hazuki.yuzubrowser.ui.INTENT_ACTION_PREFIX
 import jp.hazuki.yuzubrowser.ui.INTENT_EXTRA_PREFIX
 
@@ -38,5 +39,13 @@ class Constants {
 
         /** res block */
         const val ACTION_BLOCK_IMAGE = "$INTENT_ACTION_PREFIX.action_block_image"
+    }
+
+    object share {
+        val SHARE_URL: Uri = Uri.parse("https://yuzu.share/")
+        const val GDL_DYNAMIC_URL = "https://hazuki.page.link/"
+        const val UTM_TITLE = "Download Yuzu App"
+        const val UTM_DESCRIPTION = "Try YuzuBrowser today!"
+        const val UTM_IMAGE_URL = "https://dl3.cbsistatic.com/catalog/2020/03/25/cd7de15c-73e1-46ff-bae9-e53b464b1278/imgingest-5193827876681925843.png"
     }
 }
